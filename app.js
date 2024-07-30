@@ -11,10 +11,18 @@ app.use(express.json());
 app.use(express.static(staticPath));
 app.set('view engine', 'ejs');
 
+const userRouter = require('./routes/userRouter');
+const productRouter = require('./routes/productRouter');
+const adminRouter = require('./routes/adminRouter');
+
 
 app.get('/', (req, res)=>{
     res.send('Hello from the server!');
 });
+
+app.use('/user', userRouter);
+app.use('/product', productRouter);
+app.use('/admin', adminRouter);
 
 app.listen(PORT, ()=>{
     console.log(`Server is running on ${PORT}`);
