@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const db = require('./configs/mongooseConnection');
 const path = require('path');
 const staticPath = path.join(__dirname, 'public');
