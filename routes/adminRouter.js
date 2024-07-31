@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const {loginAdmin, registerAdmin, logoutAdmin} = require('../controllers/adminController');
+const { isAdminLoggedIn } = require('../middlewares/isLoggedIn');
 
-router.get('/', (req, res)=>{
+router.get('/', isAdminLoggedIn, (req, res)=>{
     res.send('This is admin router');
 });
 
