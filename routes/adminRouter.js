@@ -8,7 +8,7 @@ router.get('/', (req, res)=>{
 
 router.post('/login', loginAdmin);
 router.post('/register', registerAdmin);
-router.get('logout', logoutAdmin);
+router.get('/logout', logoutAdmin);
 
 
 module.exports = router;
