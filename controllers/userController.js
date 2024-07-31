@@ -21,7 +21,7 @@ module.exports.loginUser = async (req, res)=>{
 };
 
 module.exports.registerUser = async (req, res)=>{
-    const { fullname, email, password, picture } = req.body;
+    const { fullname, email, password } = req.body;
     let user = await userModel.findOne({email});
     if(user){
         return res.status(409).send('You already have an account');
@@ -32,7 +32,7 @@ module.exports.registerUser = async (req, res)=>{
                 fullname,
                 email,
                 password: hash,
-                picture
+                picture:  req.file ? req.file.filename : 'default.png'
             });
             const token = getToken(user);
             res.cookie('userToken', token);

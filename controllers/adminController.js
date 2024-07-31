@@ -26,7 +26,7 @@ module.exports.registerAdmin = async (req, res) => {
         return res.send('You dont have permission have to create another admin account');
     }
 
-    const { fullname, email, password, picture } = req.body;
+    const { fullname, email, password } = req.body;
 
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(password, salt, async (err, hash) => {
@@ -34,7 +34,7 @@ module.exports.registerAdmin = async (req, res) => {
                 fullname,
                 email,
                 password: hash,
-                picture
+                picture:  req.file ? req.file.filename : 'default.png'
             });
             const token = getToken(admin);
             res.cookie('adminToken', token);
