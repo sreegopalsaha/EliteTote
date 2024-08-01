@@ -3,6 +3,7 @@ const app = express();
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const db = require('./configs/mongooseConnection');
+const productModel = require('./models/product.model');
 const path = require('path');
 const staticPath = path.join(__dirname, 'public');
 const cookieParser = require('cookie-parser');
@@ -16,11 +17,17 @@ app.set('view engine', 'ejs');
 const userRouter = require('./routes/userRouter');
 const productRouter = require('./routes/productRouter');
 const adminRouter = require('./routes/adminRouter');
+const { isUserLoggedIn } = require('./middlewares/isLoggedIn');
 
 
-app.get('/', (req, res)=>{
-    res.render('index');
+app.get('/', isUserLoggedIn, (req, res)=>{
+    res.redirect('/home');
 });
+
+app.get('/home', isUserLoggedIn, async (req, res)=>{
+    let products = await productModel.find();
+    res.render('home', {products});
+})
 
 app.use('/user', userRouter);
 app.use('/product', productRouter);

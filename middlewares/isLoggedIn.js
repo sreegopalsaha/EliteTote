@@ -3,8 +3,7 @@ const jwt = require('jsonwebtoken');
 const isUserLoggedIn = (req, res, next)=>{
     const token = req.cookies.userToken;
     if(!token){
-        return res.send('Not logged in');
-        //redirect to user login page
+        return res.render('index');
     }
     const user = jwt.verify(token, process.env.JWT_KEY);
     req.user = user;

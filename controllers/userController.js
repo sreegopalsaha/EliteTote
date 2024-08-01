@@ -6,15 +6,15 @@ module.exports.loginUser = async (req, res)=>{
     const {email, password} = req.body;
     let user = await userModel.findOne({email});
     if(!user){
-        return res.send('Account not found');
+        return res.status(401).send('Invalid email or password');
     }
     bcrypt.compare(password, user.password, function(err, result) {
         if(!result){
-            return res.send('password is incorrect');
+            return res.status(401).send('Invalid email or password');
         }
         const token = getToken(user);
         res.cookie('userToken', token);
-        return res.send('Login successfully');
+        return res.redirect('/home');
 
     });
     
@@ -36,7 +36,7 @@ module.exports.registerUser = async (req, res)=>{
             });
             const token = getToken(user);
             res.cookie('userToken', token);
-            return res.send(user);
+            return res.redirect('/home');
         });
     });
     
