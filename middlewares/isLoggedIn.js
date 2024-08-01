@@ -12,8 +12,7 @@ const isUserLoggedIn = (req, res, next)=>{
 const isAdminLoggedIn = (req, res, next)=>{
     const token = req.cookies.adminToken;
     if(!token){
-        return res.send('Admin not logged in');
-        //redirect to admin login page
+        return res.render('adminLogin');
     }
     const admin = jwt.verify(token, process.env.JWT_KEY);
     req.admin = admin;

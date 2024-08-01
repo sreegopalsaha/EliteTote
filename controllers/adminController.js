@@ -6,15 +6,15 @@ module.exports.loginAdmin = async (req, res) => {
     const {email, password} = req.body;
     let admin = await adminModel.findOne({email});
     if(!admin){
-        return res.send('Account not found');
+        return res.status(401).send('Invalid email or password');
     }
     bcrypt.compare(password, admin.password, function(err, result) {
         if(!result){
-            return res.send('Password incorrect');
+            return res.status(401).send('Invalid email or password');
         }
         const token = getToken(admin);
         res.cookie('adminToken', token);
-        return res.send('Log in successfull');
+        return res.redirect('/admin/home');
     });
 
 
@@ -22,8 +22,8 @@ module.exports.loginAdmin = async (req, res) => {
 
 module.exports.registerAdmin = async (req, res) => {
     let admin = await adminModel.find();
-    if (admin.length >0 ) {
-        return res.send('You dont have permission have to create another admin account');
+    if (admin.length > 0 ) {
+        return res.send('You dont have permission have to create another admin account'); //Ensures there is only one admin.
     }
 
     const { fullname, email, password } = req.body;
