@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- The Play CDN is designed for development purposes only, and is not the best choice for production. -->
+</head>
+
+<body class="font-['helvetica_now_display']">
+    <nav class="w-full fixed bg-blue-100 top-0 left-0 px-5 py-3 flex items-center justify-between">
+        <h3 class="text-xl">EliteTole</h3>
+        <div class="flex gap-10">
+            <a href="/admin/logout" class="text-[2rem]"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+    </nav>
+
+    <div class="w-full h-screen flex items-start px-20 py-20">
+        <div class="w-[25%] flex h-screen flex-col items-start">
+            <div class="flex flex-col">
+                <a class="block w-fit mb-2 bg-orange-900 p-1 text-white" href="">All Products</a>
+                <a class="block w-fit mb-2 hover:bg-orange-900 p-1 hover:text-white" href="/admin/create">Create new product</a>
+            </div>
+        </div>
+        <div class="w-[75%] flex flex-col gap-5 h-screen">
+            <div class="flex items-start gap-5 flex-wrap">
+                <% products.forEach(function(product){ %>
+                    <div class="w-60">
+                        <div class="w-full h-52 flex items-center justify-center bg-[<%= product.bgcolor %>]">
+                            <img class="h-[12rem]" src="/media/upload/<%=product.image%>" alt="">
+                        </div>
+                        <div
+                            class="flex justify-between bg-[<%= product.panelcolor %>] items-center px-4 py-4 text-[<%= product.textcolor %>]">
+                            <div>
+                                <h3>
+                                    <%= product.name %>
+                                </h3>
+                                <h4>₹ <%= product.price %>
+                                </h4>
+                            </div>
+                            <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white" href="/product/edit/<%=product._id%>">
+                                Edit
+                            </a>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
