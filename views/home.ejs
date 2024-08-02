@@ -48,7 +48,7 @@
 
         <!-- Products -->
         <div class="w-[88%] ml-2 flex flex-col gap-5 h-fit">
-            <div class="flex items-start gap-2 flex-wrap">
+            <div class="flex items-start gap-3 flex-wrap">
                 <% products.forEach(function(product){ %>
                     <div class="w-60">
                         <div class="w-full h-52 flex items-center justify-center bg-[<%= product.bgcolor %>]">
@@ -60,7 +60,7 @@
                                 <h3>
                                     <%= product.name %>
                                 </h3>
-                                <h4>₹ <%= product.price %>
+                                <h4>₹<%= product.price %>
                                 </h4>
                             </div>
                             <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white"
