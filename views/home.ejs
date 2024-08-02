@@ -22,8 +22,9 @@
         </div>
     </nav>
 
-    <div class="w-full h-screen flex items-start px-20 py-20">
-        <div class="w-[25%] flex h-screen flex-col items-start">
+    <div class="w-full h-fit flex items-start px-10 py-20">
+        <!-- Sidebar -->
+        <div class="w-[12%] flex h-screen flex-col items-start">
             <div class="flex items-center gap-2">
                 <h3>Sort by</h3>
                 <form action="/shop">
@@ -44,8 +45,10 @@
                 <a class="block w-fit mb-2" href="">Discount</a>
             </div>
         </div>
-        <div class="w-[75%] flex flex-col gap-5 h-screen">
-            <div class="flex items-start gap-5">
+
+        <!-- Products -->
+        <div class="w-[88%] ml-2 flex flex-col gap-5 h-fit">
+            <div class="flex items-start gap-2 flex-wrap">
                 <% products.forEach(function(product){ %>
                     <div class="w-60">
                         <div class="w-full h-52 flex items-center justify-center bg-[<%= product.bgcolor %>]">
@@ -71,4 +74,5 @@
         </div>
     </div>
 </body>
+
 </html>
