@@ -22,7 +22,7 @@ router.get('/addcart/:productId', isUserLoggedIn, async (req, res)=>{
 
 router.get('/cart', isUserLoggedIn, async(req, res)=>{
     const user = await userModel.findById(req.user.id).populate('cart');
-    res.render('cart', {product: user.cart});
+    res.render('cart', {products: user.cart});
 });
 
 module.exports = router;
