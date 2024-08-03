@@ -3,6 +3,8 @@ const router = express.Router();
 const productModel = require('../models/product.model');
 const { isAdminLoggedIn } = require('../middlewares/isLoggedIn');
 const upload = require('../configs/multerConfig');
+const path = require('path');
+const fs = require('fs');
 
 router.get('/', (req, res) => {
     res.send('This is product router');
@@ -41,12 +43,20 @@ router.post('/update/:productId', isAdminLoggedIn, upload.single('productImg'), 
 });
 
 router.get('/delete/:productId', isAdminLoggedIn, async (req, res) => {
-    const product = await productModel.findByIdAndDelete(req.params.productId);
-    if (product) {
-        return res.redirect('/admin/home');
-    } else{
-        res.send("Product not found");
-    }
+        const product = await productModel.findById(req.params.productId);
+        if (!product) {
+            return res.send("Product not found");
+        }
+        const imagePath = path.join(__dirname, '../', 'public', 'media', 'upload', product.image);
+        // Delete the image from the server
+        fs.unlink(imagePath, async (err) => {
+            if (err) {
+                return res.send("Failed to delete the product: " + err.message);
+            }
+            // Delete the product from the database
+            await productModel.findByIdAndDelete(req.params.productId);
+            return res.redirect('/admin/home');
+        });
 });
 
 module.exports = router;
