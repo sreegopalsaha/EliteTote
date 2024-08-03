@@ -18,4 +18,9 @@ router.get('/home', isAdminLoggedIn, async (req, res)=>{
     res.render('adminHome', {products});
 });
 
+router.get('/create', isAdminLoggedIn, async (req, res)=>{
+    res.render('createProduct');
+});
+
+
 module.exports = router;
