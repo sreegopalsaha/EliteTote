@@ -24,7 +24,7 @@ router.get('/create', isAdminLoggedIn, async (req, res)=>{
 
 router.get('/update/:productId', isAdminLoggedIn, async (req, res)=>{
     let product = await productModel.findOne({_id:req.params.productId});
-    res.send(product);
+    res.render('updateProduct', {product});
 });
 
 module.exports = router;
