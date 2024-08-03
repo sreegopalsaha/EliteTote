@@ -64,9 +64,14 @@
                                 class="border p-2 rounded w-full">
                         </div>
                     </div>
-                    <input class="px-5 py-2 rounded mt-3 bg-yellow-500 text-white" type="submit"
+
+                    <div class="flex gap-5  mt-3">
+                        <input class="px-5 py-2 rounded bg-yellow-500 text-white" type="submit"
                         value="Update Product">
+                        <a class="px-5 py-2 rounded bg-red-500 text-white" href="/product/delete/<%=product._id%>">Delete Product</a>
+                    </div>
                 </form>
+
             </main>
         </div>
     </div>

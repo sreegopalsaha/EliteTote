@@ -40,4 +40,13 @@ router.post('/update/:productId', isAdminLoggedIn, upload.single('productImg'), 
     res.redirect('/admin');
 });
 
+router.get('/delete/:productId', isAdminLoggedIn, async (req, res) => {
+    const product = await productModel.findByIdAndDelete(req.params.productId);
+    if (product) {
+        return res.redirect('/admin/home');
+    } else{
+        res.send("Product not found");
+    }
+});
+
 module.exports = router;
