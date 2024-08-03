@@ -22,5 +22,9 @@ router.get('/create', isAdminLoggedIn, async (req, res)=>{
     res.render('createProduct');
 });
 
+router.get('/update/:productId', isAdminLoggedIn, async (req, res)=>{
+    let product = await productModel.findOne({_id:req.params.productId});
+    res.send(product);
+});
 
 module.exports = router;
